@@ -113,6 +113,22 @@
       align-items: center;
     }
 
+    .nav-links a[data-nav="about"] {
+      position: relative;
+      margin-left: clamp(12px, 1.4vw, 22px);
+    }
+
+    .nav-links a[data-nav="about"]::before {
+      position: absolute;
+      top: 50%;
+      left: calc(clamp(12px, 1.4vw, 22px) * -1);
+      width: 1px;
+      height: 16px;
+      background: rgba(247, 242, 232, 0.28);
+      content: "";
+      transform: translateY(-50%);
+    }
+
     .nav-links a {
       padding: 4px 0 6px;
       border-bottom: 1px solid transparent;
@@ -489,8 +505,9 @@
 
     .tags li {
       padding: 4px 9px;
-      border: 1px solid rgba(255, 110, 64, 0.5);
-      color: #ffb79b;
+      border: 1px solid rgba(247, 242, 232, 0.28);
+      background: transparent;
+      color: #c9c0b3;
       font-size: 0.73rem;
       font-weight: 700;
       letter-spacing: 0.01em;
@@ -515,6 +532,39 @@
     }
 
     .project-points p {
+      margin: 0;
+    }
+
+    .project-sublead {
+      margin: -10px 0 22px;
+      color: #d8d0c4;
+      font-size: clamp(1rem, 1.25vw, 1.15rem);
+      line-height: 1.68;
+      text-wrap: pretty;
+    }
+
+    .project-quote {
+      margin: 0 0 24px;
+      border-top: 1px solid rgba(247, 242, 232, 0.18);
+      border-bottom: 1px solid rgba(247, 242, 232, 0.18);
+      padding: 15px 0;
+      color: #f0c5b4;
+      font-family: var(--cn-serif);
+      font-size: clamp(1rem, 1.25vw, 1.18rem);
+      font-style: italic;
+      line-height: 1.68;
+    }
+
+    .project-detail {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      color: #cfc6b8;
+      font-size: 0.95rem;
+      line-height: 1.68;
+    }
+
+    .project-detail p {
       margin: 0;
     }
 
@@ -1138,6 +1188,66 @@
       margin-top: 12px;
       padding: 7px 10px;
       width: 100%;
+    }
+
+    .memory-product {
+      position: absolute;
+      top: 34px;
+      left: 50%;
+      width: min(420px, 88vw);
+      border: 1px solid rgba(247, 242, 232, 0.18);
+      background: rgba(11, 11, 10, 0.94);
+      color: #d8d0c4;
+      transform: translateX(-50%) rotate(1.4deg);
+    }
+
+    .memory-product-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      border-bottom: 1px solid rgba(247, 242, 232, 0.14);
+      padding: 16px 18px;
+    }
+
+    .memory-product-header strong {
+      color: var(--ink);
+      font-family: var(--cn-serif);
+      font-size: 1.12rem;
+      font-weight: 600;
+    }
+
+    .memory-product-header span {
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+
+    .memory-product-body {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .memory-product-card {
+      border: 1px solid rgba(247, 242, 232, 0.16);
+      background: rgba(247, 242, 232, 0.05);
+      padding: 14px;
+    }
+
+    .memory-product-card em {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--accent);
+      font-style: normal;
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+
+    .memory-product-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.58;
     }
 
     .memory-demo-board {
@@ -1835,7 +1945,7 @@
         <div class="hero-statement">
           <p class="tagline">
             <span>把人文判断</span>
-            <span>做成可用的 AI 产品。</span>
+            <span>做成可用的 AI 产品</span>
           </p>
           <p class="intro-line">
             哲学训练负责界定问题，产品判断负责选择取舍，vibe coding 负责让概念尽快变成可试用的界面。
@@ -1880,7 +1990,7 @@
         <p class="small-label">Working thesis</p>
         <div>
           <p class="intro-note">
-            好的 AI 产品并不来自把一切算清楚，而来自理解那些无法被完全计算的东西：语境、欲望、误会、记忆与信任。Vibe coding 对她而言不是工程炫技，而是一种把判断力快速外化的思考工具。
+            好的 AI 产品并不来自把一切算清楚，而来自理解那些无法被完全计算的东西：语境、欲望、误会、记忆与信任。Vibe coding 对她而言不是为了展示技术，而是一种把判断力快速外化的思考工具。
           </p>
         </div>
         <div class="position-image" aria-label="语境、欲望、记忆与信任的视觉卡片">
@@ -1904,12 +2014,17 @@
           <li>Vibe Coding</li>
         </ul>
         <p class="project-lead">
-          一个让拖延有体感代价的 Apple Watch 应用：当你忽视洗手、deadline 或正念任务，手腕上会燃起一团珊瑚色的火。
+          一个让拖延有体感代价的 Apple Watch 应用。
         </p>
-        <div class="project-points">
-          <p>Ablaze 的核心是人格化惩罚：火知道你忽视过几次，文案会从“该洗手了。”逐步收紧到“洗手”。</p>
-          <p>MVP 验证统一火焰视觉、今日账本，以及 deadline / 洗手 / 正念的阶段机制；久坐火因与 Apple Stand 重合，被收进实验功能。</p>
-          <p>社交版本只显示朋友“正在被什么烧”的抽象状态。互相纵火、送粉色火、下浅灰雾，都是对提醒权力的产品化处理。</p>
+        <p class="project-sublead">
+          当你忽视洗手、deadline 或正念任务，手腕上会燃起一团珊瑚色的火。
+        </p>
+        <p class="project-quote">
+          “它知道你忽视过几次。文案会从‘该洗手了。’收紧到‘洗手’。”
+        </p>
+        <div class="project-detail">
+          <p>社交版只让朋友看到你“正在被什么烧”，不公开具体内容。</p>
+          <p>互相纵火，送粉色火，下浅灰雾，这些是对提醒权力的产品化处理。</p>
         </div>
       </div>
       <div class="visual-stage reveal">
@@ -2071,43 +2186,24 @@
         </div>
       </div>
       <div class="visual-stage reveal">
-        <div class="flow-panel" aria-label="行为数据流向用户画像的动态示意">
-          <svg viewBox="0 0 560 560" role="img">
-            <path class="flow-path" d="M118 105 C210 138 220 205 280 280" />
-            <path class="flow-path" d="M430 110 C356 156 347 218 280 280" />
-            <path class="flow-path" d="M72 282 C154 270 194 282 280 280" />
-            <path class="flow-path" d="M478 286 C406 277 360 276 280 280" />
-            <path class="flow-path" d="M132 454 C207 395 214 342 280 280" />
-            <path class="flow-path" d="M422 450 C352 388 344 338 280 280" />
-            <circle class="flow-node" cx="118" cy="105" r="42" />
-            <circle class="flow-node" cx="430" cy="110" r="42" />
-            <circle class="flow-node" cx="72" cy="282" r="42" />
-            <circle class="flow-node" cx="478" cy="286" r="42" />
-            <circle class="flow-node" cx="132" cy="454" r="42" />
-            <circle class="flow-node" cx="422" cy="450" r="42" />
-            <circle class="flow-core" cx="280" cy="280" r="72" />
-            <text class="flow-label" x="118" y="110" text-anchor="middle">搜索</text>
-            <text class="flow-label" x="430" y="115" text-anchor="middle">点赞</text>
-            <text class="flow-label" x="72" y="287" text-anchor="middle">收藏</text>
-            <text class="flow-label" x="478" y="291" text-anchor="middle">评论</text>
-            <text class="flow-label" x="132" y="459" text-anchor="middle">关注</text>
-            <text class="flow-label" x="422" y="455" text-anchor="middle">购买</text>
-            <text class="flow-label" x="280" y="273" text-anchor="middle">User</text>
-            <text class="flow-label" x="280" y="294" text-anchor="middle">Memory</text>
-            <circle class="packet" cx="280" cy="280" r="6" style="--sx:-162px; --sy:-175px; animation-delay:0ms" />
-            <circle class="packet" cx="280" cy="280" r="6" style="--sx:150px; --sy:-170px; animation-delay:460ms" />
-            <circle class="packet" cx="280" cy="280" r="6" style="--sx:-208px; --sy:2px; animation-delay:920ms" />
-            <circle class="packet" cx="280" cy="280" r="6" style="--sx:198px; --sy:6px; animation-delay:1380ms" />
-            <circle class="packet" cx="280" cy="280" r="6" style="--sx:-148px; --sy:174px; animation-delay:1840ms" />
-            <circle class="packet" cx="280" cy="280" r="6" style="--sx:142px; --sy:170px; animation-delay:2300ms" />
-          </svg>
+        <div class="memory-product" aria-label="点点 Memory 产品界面示意">
+          <div class="memory-product-header">
+            <strong>点点 Memory</strong>
+            <span>personalized</span>
+          </div>
+          <div class="memory-product-body">
+            <div class="memory-product-card">
+              <em>旧收藏被重新激活</em>
+              <p>翻到一条 2025 年秋天的收藏：旧书店旁边那家小咖啡馆。</p>
+            </div>
+            <div class="memory-product-card">
+              <em>结合当下要求</em>
+              <p data-memory-output>“你现在离它 1.1km。今晚如果只想轻一点，我会把路线排慢，避开人多的主街。”</p>
+            </div>
+            <button class="prototype-button memory-output-button" type="button" data-memory-output-button>调用一次记忆</button>
+          </div>
         </div>
-        <div class="conversation-output">
-          <strong>对话输出</strong><br />
-          <span data-memory-output>“我记得你最近常看城市漫步，也收藏过几家老书店。要不要把今天的路线排得慢一点？”</span>
-          <button class="prototype-button memory-output-button" type="button" data-memory-output-button>调用一次记忆</button>
-        </div>
-        <p class="visual-caption">数据流不是监控的隐喻，而是一套关于分寸感的产品设计。</p>
+        <p class="visual-caption">重点不是展示数据流，而是把记忆变成用户能理解、能拒绝、能继续追问的界面。</p>
       </div>
     </section>
 
@@ -2174,7 +2270,7 @@
         }
 
         if (visible.target.id === "memory") {
-          document.querySelector(".flow-panel")?.classList.add("active");
+          document.querySelector(".memory-product")?.classList.add("active");
         }
       },
       { threshold: [0.35, 0.55, 0.75] }
@@ -2300,7 +2396,7 @@
     const memoryOutput = document.querySelector("[data-memory-output]");
     document.querySelector("[data-memory-output-button]")?.addEventListener("click", () => {
       if (!memoryOutput) return;
-      memoryOutput.textContent = "“我记得你最近连续看了三篇关于独处的帖子，也收藏了两条夜间散步路线。今晚的推荐会少一点热闹，多一点可退出的空间。”";
+      memoryOutput.textContent = "“我记得你最近连续看了三篇关于独处的帖子，也收藏过两条夜间散步路线。今晚的推荐会少一点热闹，多一点可退出的空间。”";
     });
   </script>
 </body>

@@ -310,10 +310,13 @@
     }
 
     .hero-tile:nth-child(3) {
-      grid-column: span 2;
-      min-height: 72px;
       background: var(--accent);
       color: #fff9f1;
+    }
+
+    .hero-tile:nth-child(4) {
+      background: #151310;
+      color: #d8d0c4;
     }
 
     .hero-index {
@@ -786,6 +789,12 @@
         #101616;
     }
 
+    #meituan .visual-stage::before {
+      background:
+        linear-gradient(135deg, rgba(233, 218, 190, 0.24), rgba(255, 110, 64, 0.06)),
+        #15120f;
+    }
+
     .visual-stage:hover {
       transform: translateY(-4px);
     }
@@ -1248,6 +1257,122 @@
       margin: 0;
       font-size: 0.9rem;
       line-height: 1.58;
+    }
+
+    .meituan-demo {
+      position: absolute;
+      top: 34px;
+      left: 50%;
+      display: grid;
+      gap: 14px;
+      width: min(560px, 92vw);
+      transform: translateX(-50%) rotate(1deg);
+    }
+
+    .meituan-window {
+      overflow: hidden;
+      border: 1px solid rgba(247, 242, 232, 0.18);
+      border-radius: 28px;
+      background: #f4ecdf;
+      box-shadow: 0 22px 42px rgba(0, 0, 0, 0.28);
+    }
+
+    .meituan-window-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid rgba(18, 16, 13, 0.08);
+      padding: 16px 18px;
+      color: #1d1a17;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .meituan-window-bar span {
+      color: rgba(29, 26, 23, 0.46);
+      font-weight: 600;
+    }
+
+    .meituan-window-bar span:first-child {
+      color: #1d1a17;
+      font-weight: 700;
+    }
+
+    .meituan-shot {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 11;
+      object-fit: cover;
+      object-position: top center;
+      transition: opacity 220ms ease, transform 220ms ease, filter 220ms ease;
+    }
+
+    .meituan-shot.swap {
+      opacity: 0.5;
+      filter: saturate(0.92);
+      transform: scale(0.99);
+    }
+
+    .meituan-preview-panel {
+      border: 1px solid rgba(247, 242, 232, 0.18);
+      background: rgba(11, 11, 10, 0.94);
+      padding: 18px 18px 16px;
+      color: #d8d0c4;
+    }
+
+    .meituan-preview-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .meituan-preview-head strong {
+      color: var(--ink);
+      font-family: var(--cn-serif);
+      font-size: 1.08rem;
+      font-weight: 600;
+    }
+
+    .meituan-preview-head span {
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+
+    .meituan-preview-panel p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.64;
+    }
+
+    .meituan-preview-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .meituan-preview-actions button {
+      padding: 7px 10px;
+      border: 1px solid rgba(255, 110, 64, 0.36);
+      background: transparent;
+      color: #d8d0c4;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: border-color 180ms ease, color 180ms ease, background 180ms ease, transform 180ms ease;
+    }
+
+    .meituan-preview-actions button:hover,
+    .meituan-preview-actions button.active {
+      border-color: rgba(255, 110, 64, 0.76);
+      background: rgba(255, 110, 64, 0.12);
+      color: #ffd9ca;
+      transform: translateY(-1px);
     }
 
     .memory-demo-board {
@@ -1931,6 +2056,7 @@
       <a href="#campfire" data-nav="campfire">Ablaze</a>
       <a href="#luxun" data-nav="luxun">Lu Xun</a>
       <a href="#memory" data-nav="memory">Memory</a>
+      <a href="#meituan" data-nav="meituan">Meituan</a>
       <a href="#about" data-nav="about">About</a>
     </div>
   </nav>
@@ -1955,12 +2081,13 @@
       </div>
       <div class="hero-aside reveal">
         <p class="hero-deck">
-          三个原型处理同一个问题：当 AI 和软件介入人的日常经验时，界面该如何保留分寸、压力与温度。
+          四个原型处理同一个问题：当 AI 和软件介入人的日常经验时，界面该如何保留分寸、压力与温度。
         </p>
         <div class="hero-board" aria-label="作品视觉索引">
           <div class="hero-tile">Ablaze<br />行为火焰</div>
           <div class="hero-tile">Lu Xun<br />文化现场</div>
           <div class="hero-tile">Memory<br />克制的用户画像</div>
+          <div class="hero-tile">Meituan<br />周末办事 Agent</div>
         </div>
         <ol class="hero-index">
           <li>
@@ -1979,6 +2106,12 @@
             <a href="#memory">
               <span>03</span>
               <span><strong>Personalized Memory Engine</strong><br />AI product prototype</span>
+            </a>
+          </li>
+          <li>
+            <a href="#meituan">
+              <span>04</span>
+              <span><strong>Meituan Weekend Agent</strong><br />Hackathon prototype</span>
             </a>
           </li>
         </ol>
@@ -2203,6 +2336,60 @@
       </div>
     </section>
 
+    <section class="project section site-shell" id="meituan" data-section="meituan">
+      <div class="project-copy reveal">
+        <p class="project-kicker">Meituan AI Hackathon / Weekend planning agent</p>
+        <div class="project-number">04</div>
+        <h2 class="project-title">Weekend Agent <span class="cn">把周末闲时活动规划做完</span></h2>
+        <ul class="tags" aria-label="项目标签">
+          <li>FastAPI</li>
+          <li>SSE</li>
+          <li>Mock APIs</li>
+          <li>Planning Agent</li>
+        </ul>
+        <p class="project-lead">
+          美团 2026 AI Hackathon 命题六“本地探索：周末闲时活动规划”的 Agent 原型：输入一句周末目标，系统会拆解成玩、吃、逛和预订，把天气、票、座位、距离与分享做成一条可执行链路。
+        </p>
+        <div class="project-points">
+          <p>它不是单纯推荐地点，而是把“怎么安排”直接翻译成可确认、可执行的方案。</p>
+          <p>Demo 用 Mock API 模拟景点、餐厅、附加服务和异常处理，保证整个流程能跑通。</p>
+          <p>设计重点是把理解意图、确认方案、一键执行、生成报告放进同一个界面。</p>
+        </div>
+      </div>
+      <div class="visual-stage reveal">
+        <div class="meituan-demo" aria-label="周末办事 Agent 原型">
+          <div class="meituan-window">
+            <div class="meituan-window-bar">
+              <span>美团 周末办事 Agent</span>
+              <span data-meituan-stage-label>输入</span>
+            </div>
+            <img
+              class="meituan-shot"
+              data-meituan-shot
+              src="assets/meituan/implemented-home.png"
+              alt="美团周末办事 Agent 原型图"
+            />
+          </div>
+          <div class="meituan-preview-panel">
+            <div class="meituan-preview-head">
+              <strong data-meituan-stage-title>输入</strong>
+              <span>simple click demo</span>
+            </div>
+            <p data-meituan-stage-copy>
+              一句话输入一个周末目标，系统先理解硬约束，再生成 4-6 小时的可执行链路。
+            </p>
+            <div class="meituan-preview-actions" role="tablist" aria-label="周末办事 Agent 状态切换">
+              <button class="active" type="button" data-meituan-stage="input">输入</button>
+              <button type="button" data-meituan-stage="plan">方案</button>
+              <button type="button" data-meituan-stage="execute">执行</button>
+              <button type="button" data-meituan-stage="share">分享</button>
+            </div>
+          </div>
+        </div>
+        <p class="visual-caption">重点不是推荐几个地方，而是把周末出游拆成可确认、可执行、可分享的一条链路。</p>
+      </div>
+    </section>
+
     <section class="about section site-shell" id="about" data-section="about">
       <div class="about-grid reveal">
         <div>
@@ -2386,6 +2573,54 @@
         screen?.classList.remove("shaking");
         void screen?.offsetWidth;
         screen?.classList.add("shaking");
+      });
+    });
+
+    const meituanShot = document.querySelector("[data-meituan-shot]");
+    const meituanStageLabel = document.querySelector("[data-meituan-stage-label]");
+    const meituanStageTitle = document.querySelector("[data-meituan-stage-title]");
+    const meituanStageCopy = document.querySelector("[data-meituan-stage-copy]");
+    const meituanButtons = [...document.querySelectorAll("[data-meituan-stage]")];
+    const meituanStages = {
+      input: {
+        label: "输入",
+        title: "输入",
+        copy: "一句话输入一个周末目标，系统先理解硬约束，再生成 4-6 小时的可执行链路。",
+        shot: "assets/meituan/implemented-home.png",
+      },
+      plan: {
+        label: "方案",
+        title: "方案",
+        copy: "它会先补齐天气、距离、票和座位，再把玩、吃、逛排成能执行的时间线。",
+        shot: "assets/meituan/bottom-sheet-updated-home.png",
+      },
+      execute: {
+        label: "执行",
+        title: "执行",
+        copy: "确认后，系统继续跑 Mock API 的预订和附加服务链路，并覆盖无票、满座、冲突等异常。",
+        shot: "assets/meituan/rich-result-components-home.png",
+      },
+      share: {
+        label: "分享",
+        title: "分享",
+        copy: "最后生成可转发的行程报告，把方案、订单、亮点和给朋友的一句话都放在同一张卡里。",
+        shot: "assets/meituan/rich-result-components-home.png",
+      },
+    };
+
+    meituanButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const stage = meituanStages[button.dataset.meituanStage];
+        if (!stage || !meituanShot || !meituanStageLabel || !meituanStageTitle || !meituanStageCopy) return;
+
+        meituanButtons.forEach((item) => item.classList.toggle("active", item === button));
+        meituanStageLabel.textContent = stage.label;
+        meituanStageTitle.textContent = stage.title;
+        meituanStageCopy.textContent = stage.copy;
+        meituanShot.classList.remove("swap");
+        void meituanShot.offsetWidth;
+        meituanShot.src = stage.shot;
+        meituanShot.classList.add("swap");
       });
     });
 

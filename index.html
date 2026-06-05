@@ -461,18 +461,18 @@
       display: inline-flex;
       gap: 12px;
       align-items: center;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
       color: var(--accent);
-      font-family: var(--cn-serif);
-      font-size: clamp(2.8rem, 5vw, 5.8rem);
-      font-weight: 600;
-      letter-spacing: -0.035em;
+      font-family: var(--sans);
+      font-size: 0.86rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
       line-height: 1.2;
     }
 
     .project-number::after {
       display: block;
-      width: clamp(56px, 7vw, 108px);
+      width: clamp(44px, 5vw, 72px);
       height: 1px;
       background: currentColor;
       content: "";
@@ -757,7 +757,24 @@
     .visual-stage {
       position: relative;
       min-height: 760px;
+      overflow: hidden;
+      isolation: isolate;
       transition: transform 240ms ease;
+    }
+
+    .project-p5-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.72;
+      mix-blend-mode: screen;
+    }
+
+    .project-p5-layer canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
     }
 
     .visual-stage::before {
@@ -769,6 +786,11 @@
         linear-gradient(135deg, rgba(255, 110, 64, 0.2), rgba(255, 110, 64, 0)),
         #171512;
       content: "";
+    }
+
+    .visual-stage > :not(.project-p5-layer) {
+      position: relative;
+      z-index: 1;
     }
 
     #campfire .visual-stage::before {
@@ -2047,15 +2069,1171 @@
         transform: none !important;
       }
     }
+
+    :root {
+      --page-bg: oklch(0.145 0.018 38);
+      --page-bg-2: oklch(0.19 0.034 34);
+      --char: oklch(0.92 0.022 67);
+      --bone: oklch(0.78 0.04 68);
+      --ash: oklch(0.58 0.046 67);
+      --ember: oklch(0.67 0.21 36);
+      --ember-tip: oklch(0.88 0.13 79);
+      --oxide: oklch(0.52 0.12 174);
+      --oxide-light: oklch(0.78 0.09 169);
+      --violet-arc: oklch(0.64 0.18 287);
+      --sulfur: oklch(0.82 0.17 96);
+      --paper-cold: oklch(0.9 0.03 76);
+      --ink-line: color-mix(in oklch, var(--char), transparent 84%);
+      --ink-line-strong: color-mix(in oklch, var(--ember), transparent 42%);
+      --paper: var(--page-bg);
+      --paper-deep: var(--page-bg-2);
+      --surface: var(--paper-cold);
+      --surface-deep: oklch(0.78 0.04 78);
+      --ink: var(--char);
+      --ink-dark: oklch(0.16 0.018 35);
+      --muted: var(--ash);
+      --muted-dark: oklch(0.34 0.035 58);
+      --line: var(--ink-line);
+      --line-dark: color-mix(in oklch, var(--ink-dark), transparent 78%);
+      --accent: var(--ember);
+      --accent-deep: oklch(0.55 0.19 35);
+      --teal: var(--oxide);
+      --teal-soft: var(--oxide-light);
+      --clay-soft: var(--ember-tip);
+      --ochre: var(--sulfur);
+      --shadow: none;
+    }
+
+    body {
+      background:
+        linear-gradient(115deg, oklch(0.12 0.015 38) 0%, var(--page-bg) 42%, oklch(0.17 0.034 350) 100%);
+      color: var(--char);
+    }
+
+    body::before {
+      opacity: 0.28;
+      background:
+        linear-gradient(90deg, transparent 0, transparent calc(100% - 1px), color-mix(in oklch, var(--char), transparent 94%) calc(100% - 1px)),
+        linear-gradient(180deg, color-mix(in oklch, var(--char), transparent 94%) 0, transparent 1px);
+      background-size: clamp(86px, 9vw, 138px) clamp(86px, 9vw, 138px);
+      mask-image: linear-gradient(to bottom, black 0, transparent 70%);
+    }
+
+    .top-nav {
+      width: min(1180px, calc(100% - 28px));
+      padding: 12px 14px;
+      border: 1px solid color-mix(in oklch, var(--char), transparent 86%);
+      border-radius: 999px;
+      background: color-mix(in oklch, var(--page-bg), transparent 6%);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-mark {
+      color: var(--char);
+    }
+
+    .nav-links a {
+      color: color-mix(in oklch, var(--bone), transparent 14%);
+      font-size: 0.78rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--ember-tip);
+    }
+
+    .hero {
+      min-height: 94svh;
+      padding-top: 118px;
+      align-items: end;
+    }
+
+    .hero::before {
+      top: 112px;
+      right: max(-42px, -3vw);
+      width: min(38vw, 520px);
+      height: min(66vh, 650px);
+      border: 0;
+      background:
+        linear-gradient(145deg, var(--ember) 0%, var(--ember-tip) 48%, var(--oxide) 100%);
+      clip-path: polygon(0 10%, 100% 0, 86% 92%, 12% 100%);
+      opacity: 0.9;
+    }
+
+    .hero-copy {
+      grid-column: 1 / 8;
+      padding-bottom: clamp(64px, 9vh, 112px);
+    }
+
+    .hero-aside {
+      grid-column: 8 / 13;
+      min-height: 560px;
+      border: 0;
+      background: transparent;
+      padding: clamp(22px, 3vw, 34px) 0 clamp(56px, 7vh, 90px);
+    }
+
+    .hero-aside::before {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(180deg, color-mix(in oklch, var(--char), transparent 94%), transparent),
+        color-mix(in oklch, var(--page-bg-2), transparent 8%);
+      clip-path: polygon(8% 0, 100% 4%, 94% 100%, 0 86%);
+      content: "";
+    }
+
+    .hero-kicker,
+    .project-kicker,
+    .small-label {
+      color: var(--ember-tip);
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
+
+    .tagline {
+      max-width: 790px;
+      color: var(--char);
+      font-size: clamp(3.2rem, 7.1vw, 5.7rem);
+      letter-spacing: -0.03em;
+    }
+
+    .intro-line,
+    .hero-deck,
+    .intro-note,
+    .project-sublead,
+    .project-points,
+    .project-detail,
+    .activity-card p,
+    .activity-demo-result,
+    .memory-product-card p,
+    .conversation-output,
+    .meituan-preview-panel p,
+    .about-copy {
+      color: color-mix(in oklch, var(--bone), transparent 4%);
+    }
+
+    .hero-meta {
+      border-bottom-color: color-mix(in oklch, var(--ember), transparent 40%);
+    }
+
+    .hero-board {
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 8px;
+      transform: rotate(-1deg);
+    }
+
+    .hero-tile {
+      min-height: 118px;
+      border: 0;
+      border-radius: 0;
+      font-size: 0.96rem;
+    }
+
+    .hero-tile:nth-child(1) {
+      background: var(--ember);
+      color: oklch(0.13 0.02 35);
+    }
+
+    .hero-tile:nth-child(2) {
+      background: var(--oxide);
+      color: oklch(0.96 0.02 165);
+    }
+
+    .hero-tile:nth-child(3) {
+      background: var(--paper-cold);
+      color: oklch(0.18 0.025 53);
+    }
+
+    .hero-tile:nth-child(4) {
+      background: var(--violet-arc);
+      color: white;
+    }
+
+    .hero-index {
+      border-top-color: color-mix(in oklch, var(--char), transparent 82%);
+    }
+
+    .hero-index a {
+      grid-template-columns: 34px 1fr;
+      color: color-mix(in oklch, var(--bone), transparent 10%);
+    }
+
+    .hero-index span:first-child,
+    .project-number,
+    .activity-card-title span,
+    .activity-demo-label,
+    .memory-product-card em,
+    .memory-product-header span,
+    .meituan-preview-head span {
+      color: var(--ember-tip);
+    }
+
+    .intro {
+      padding-bottom: 112px;
+    }
+
+    .intro-grid {
+      grid-template-columns: minmax(130px, 0.24fr) minmax(0, 1fr) minmax(280px, 0.7fr);
+      border-top-color: color-mix(in oklch, var(--ember), transparent 48%);
+    }
+
+    .position-image {
+      transform: rotate(-1deg);
+    }
+
+    .position-card {
+      border: 0;
+    }
+
+    .position-card:nth-child(1) {
+      background: var(--ember);
+      color: oklch(0.13 0.018 35);
+    }
+
+    .position-card:nth-child(2) {
+      background: var(--oxide);
+      color: white;
+    }
+
+    .position-card:nth-child(3) {
+      background: var(--sulfur);
+      color: oklch(0.16 0.018 46);
+    }
+
+    .project {
+      position: relative;
+      width: min(1240px, calc(100% - 40px));
+      border-top: 0;
+      gap: clamp(44px, 8vw, 104px);
+    }
+
+    .project::before {
+      position: absolute;
+      inset: clamp(34px, 6vw, 76px) max(-60px, -4vw);
+      z-index: -2;
+      background: var(--scene-bg, transparent);
+      clip-path: polygon(0 3%, 100% 0, 96% 100%, 4% 94%);
+      content: "";
+    }
+
+    #campfire {
+      --scene-bg: color-mix(in oklch, var(--ember), transparent 88%);
+    }
+
+    #memory {
+      --scene-bg: color-mix(in oklch, var(--oxide), transparent 82%);
+    }
+
+    #luxun {
+      --scene-bg: color-mix(in oklch, var(--paper-cold), transparent 90%);
+    }
+
+    #meituan {
+      --scene-bg: color-mix(in oklch, var(--sulfur), transparent 84%);
+    }
+
+    .project-title {
+      max-width: 11ch;
+      color: var(--char);
+      letter-spacing: -0.035em;
+    }
+
+    .project-title .cn {
+      color: color-mix(in oklch, var(--bone), transparent 5%);
+      font-size: 0.36em;
+    }
+
+    .project-lead {
+      color: var(--char);
+    }
+
+    .tags li {
+      border-color: color-mix(in oklch, var(--char), transparent 76%);
+      color: color-mix(in oklch, var(--bone), transparent 6%);
+    }
+
+    .visual-stage {
+      min-height: 780px;
+      overflow: visible;
+    }
+
+    .visual-stage::before {
+      inset: 38px 0 80px 38px;
+      border: 0;
+      background: var(--stage-bg, color-mix(in oklch, var(--page-bg-2), transparent 4%));
+      clip-path: polygon(5% 0, 100% 4%, 94% 96%, 0 100%);
+    }
+
+    #campfire .visual-stage::before {
+      --stage-bg: linear-gradient(155deg, oklch(0.2 0.05 29), oklch(0.11 0.018 35) 64%);
+    }
+
+    #memory .visual-stage::before {
+      --stage-bg: linear-gradient(155deg, oklch(0.24 0.065 174), oklch(0.13 0.022 185));
+    }
+
+    #luxun .visual-stage::before {
+      --stage-bg: linear-gradient(155deg, oklch(0.86 0.03 78), oklch(0.2 0.025 50) 72%);
+    }
+
+    #meituan .visual-stage::before {
+      --stage-bg: linear-gradient(155deg, oklch(0.74 0.14 88), oklch(0.16 0.024 45) 72%);
+    }
+
+    .visual-stage:hover {
+      transform: translateY(-2px);
+    }
+
+    .visual-caption {
+      color: color-mix(in oklch, var(--bone), transparent 18%);
+    }
+
+    .watch-face,
+    .phone-frame,
+    .meituan-window {
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.24);
+    }
+
+    .watch-face {
+      background: oklch(0.11 0.016 34);
+    }
+
+    .phone-frame {
+      background: var(--oxide);
+      border: 0;
+    }
+
+    .memory-product,
+    .conversation-output,
+    .activity-panel,
+    .activity-tab,
+    .meituan-preview-panel,
+    .memory-demo-card {
+      border-color: color-mix(in oklch, var(--char), transparent 82%);
+      background: color-mix(in oklch, var(--page-bg), transparent 4%);
+    }
+
+    .memory-product-card,
+    .activity-demo-screen {
+      border-color: color-mix(in oklch, var(--oxide-light), transparent 70%);
+      background: color-mix(in oklch, var(--oxide), transparent 88%);
+    }
+
+    .prototype-button,
+    .activity-demo-actions button,
+    .chat-composer button {
+      border-color: transparent;
+      background: var(--ember);
+      color: oklch(0.13 0.018 35);
+    }
+
+    .meituan-preview-actions button {
+      border-color: color-mix(in oklch, var(--sulfur), transparent 55%);
+    }
+
+    .meituan-preview-actions button:hover,
+    .meituan-preview-actions button.active {
+      border-color: var(--sulfur);
+      background: color-mix(in oklch, var(--sulfur), transparent 84%);
+      color: var(--char);
+    }
+
+    .about {
+      width: min(1240px, calc(100% - 40px));
+      border-top-color: color-mix(in oklch, var(--char), transparent 82%);
+    }
+
+    .about h2 {
+      color: var(--char);
+      letter-spacing: -0.03em;
+    }
+
+    .publication-list li,
+    .contact-list a,
+    .contact-list span {
+      border-bottom-color: color-mix(in oklch, var(--char), transparent 84%);
+      color: color-mix(in oklch, var(--bone), transparent 8%);
+    }
+
+    .publication-list strong,
+    .contact-list strong {
+      color: var(--char);
+    }
+
+    @media (max-width: 900px) {
+      .top-nav {
+        top: 8px;
+      }
+
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 34px;
+        padding-top: 116px;
+        align-items: start;
+      }
+
+      .hero-copy,
+      .hero-aside {
+        grid-column: auto;
+      }
+
+      .hero-copy {
+        padding-bottom: 0;
+      }
+
+      .hero-aside {
+        min-height: auto;
+        padding: 28px 18px 64px;
+      }
+
+      .hero-aside::before {
+        inset: 0;
+        clip-path: polygon(0 0, 100% 4%, 96% 100%, 0 92%);
+      }
+
+      .project {
+        width: min(calc(100% - 28px), 680px);
+      }
+
+      .project::before {
+        inset: 30px -18px;
+      }
+
+      .visual-stage::before {
+        inset: 24px 0 70px 18px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .top-nav {
+        border-radius: 0;
+        border-right: 0;
+        border-left: 0;
+      }
+
+      .hero::before {
+        top: 92px;
+        right: -80px;
+        width: 220px;
+        height: 480px;
+      }
+
+      .project-number {
+        font-size: 0.78rem;
+      }
+
+      .project-title {
+        max-width: none;
+      }
+
+      .hero-board {
+        grid-template-columns: 1fr 1fr;
+        transform: none;
+      }
+
+      .hero-index a {
+        grid-template-columns: 26px minmax(0, 1fr);
+      }
+    }
+
+    :root {
+      --void: oklch(0.115 0.018 260);
+      --void-2: oklch(0.16 0.026 252);
+      --veil: oklch(0.92 0.018 78);
+      --veil-dim: oklch(0.73 0.032 75);
+      --smoke: oklch(0.52 0.034 245);
+      --ember-live: oklch(0.69 0.22 34);
+      --ember-pale: oklch(0.86 0.13 68);
+      --verdigris: oklch(0.64 0.13 178);
+      --violet-live: oklch(0.68 0.18 296);
+      --acid-note: oklch(0.86 0.18 104);
+      --hairline: color-mix(in oklch, var(--veil), transparent 86%);
+      --hairline-hot: color-mix(in oklch, var(--ember-live), transparent 44%);
+      --paper: var(--void);
+      --paper-deep: var(--void-2);
+      --surface: var(--veil);
+      --surface-deep: oklch(0.81 0.028 78);
+      --ink: var(--veil);
+      --ink-dark: oklch(0.13 0.017 252);
+      --muted: var(--veil-dim);
+      --accent: var(--ember-live);
+      --accent-deep: oklch(0.55 0.2 32);
+      --teal: var(--verdigris);
+      --teal-soft: oklch(0.79 0.09 174);
+      --ochre: var(--acid-note);
+      --shadow: none;
+      --display: "Hiragino Mincho ProN", "Songti SC", "STSong", "Noto Serif SC", serif;
+      --body: "Avenir Next", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+    }
+
+    html {
+      background: var(--void);
+    }
+
+    body {
+      background:
+        linear-gradient(128deg, oklch(0.105 0.015 260) 0%, var(--void) 45%, oklch(0.145 0.036 20) 100%);
+      color: var(--veil);
+      font-family: var(--body);
+    }
+
+    body::before {
+      opacity: 0.22;
+      background:
+        linear-gradient(90deg, transparent 0, transparent calc(100% - 1px), color-mix(in oklch, var(--veil), transparent 95%) calc(100% - 1px)),
+        linear-gradient(180deg, color-mix(in oklch, var(--veil), transparent 96%) 0, transparent 1px);
+      background-size: clamp(112px, 12vw, 180px) clamp(112px, 12vw, 180px);
+      mask-image: linear-gradient(to bottom, black 0, transparent 72%);
+    }
+
+    body::after {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      content: "";
+      background:
+        linear-gradient(104deg, transparent 0 52%, color-mix(in oklch, var(--ember-live), transparent 90%) 52.2% 52.65%, transparent 52.85%),
+        linear-gradient(168deg, transparent 0 64%, color-mix(in oklch, var(--verdigris), transparent 91%) 64.2% 64.55%, transparent 64.8%);
+      opacity: 0.9;
+    }
+
+    .site-shell,
+    .project,
+    .about {
+      width: min(1260px, calc(100% - clamp(28px, 5vw, 76px)));
+    }
+
+    .top-nav {
+      top: 18px;
+      width: min(1180px, calc(100% - 32px));
+      padding: 10px 0 11px;
+      border: 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--veil), transparent 84%);
+      border-radius: 0;
+      background: color-mix(in oklch, var(--void), transparent 12%);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-mark {
+      color: var(--veil);
+      font-family: var(--display);
+      font-size: 0.96rem;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      gap: clamp(12px, 2vw, 28px);
+    }
+
+    .nav-links a {
+      color: color-mix(in oklch, var(--veil), transparent 31%);
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--ember-pale);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      min-height: 96svh;
+      padding-top: clamp(112px, 16vh, 164px);
+      gap: clamp(34px, 6vw, 92px);
+      align-items: end;
+    }
+
+    .hero::before {
+      display: none;
+    }
+
+    .hero-copy {
+      grid-column: 1 / 8;
+      gap: clamp(24px, 4vh, 44px);
+      padding-bottom: clamp(58px, 10vh, 118px);
+    }
+
+    .hero-meta {
+      display: flex;
+      max-width: 620px;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 22px;
+      border-bottom: 1px solid var(--hairline-hot);
+      padding-bottom: 16px;
+    }
+
+    .hero-kicker,
+    .project-kicker,
+    .small-label {
+      color: var(--ember-pale);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    h1,
+    .tagline,
+    .project-title,
+    .project-lead,
+    .about h2,
+    .about-copy,
+    .hero-deck,
+    .intro-note {
+      font-family: var(--display);
+    }
+
+    h1 {
+      color: var(--veil);
+      font-size: clamp(1.45rem, 2vw, 2rem);
+      letter-spacing: 0.05em;
+    }
+
+    .tagline {
+      max-width: 800px;
+      margin-bottom: clamp(20px, 4vh, 34px);
+      color: var(--veil);
+      font-size: clamp(3.05rem, 6.8vw, 5.7rem);
+      font-weight: 500;
+      line-height: 1.02;
+      letter-spacing: -0.026em;
+    }
+
+    .mobile-title-break {
+      display: inline;
+    }
+
+    .intro-line {
+      max-width: 54ch;
+      color: color-mix(in oklch, var(--veil), transparent 16%);
+      font-size: clamp(1.02rem, 1.25vw, 1.17rem);
+      line-height: 1.86;
+    }
+
+    .scroll-cue {
+      bottom: 42px;
+      left: 0;
+      color: color-mix(in oklch, var(--veil), transparent 40%);
+    }
+
+    .scroll-cue span {
+      background: var(--ember-pale);
+    }
+
+    .hero-aside {
+      grid-column: 8 / 13;
+      min-height: min(62vh, 600px);
+      align-content: end;
+      border: 0;
+      background: transparent;
+      padding: 0 0 clamp(58px, 10vh, 120px);
+    }
+
+    .hero-aside::before {
+      position: absolute;
+      inset: -18px -20px 38px 16px;
+      z-index: -1;
+      background:
+        linear-gradient(178deg, color-mix(in oklch, var(--veil), transparent 95%), transparent 58%),
+        color-mix(in oklch, var(--void-2), transparent 34%);
+      clip-path: polygon(4% 0, 100% 8%, 92% 94%, 0 100%);
+      content: "";
+    }
+
+    .hero-deck {
+      max-width: 31ch;
+      color: color-mix(in oklch, var(--veil), transparent 10%);
+      font-size: clamp(1.16rem, 1.8vw, 1.54rem);
+      font-weight: 500;
+      line-height: 1.82;
+    }
+
+    .hero-board {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      max-width: 440px;
+      transform: rotate(-1deg);
+    }
+
+    .hero-tile {
+      min-height: 0;
+      flex: 1 1 172px;
+      border: 1px solid color-mix(in oklch, var(--veil), transparent 84%);
+      background: transparent !important;
+      color: var(--veil) !important;
+      padding: 12px 13px;
+      font-family: var(--body);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .hero-tile:nth-child(1) {
+      border-color: color-mix(in oklch, var(--ember-live), transparent 44%);
+      color: var(--ember-pale) !important;
+    }
+
+    .hero-tile:nth-child(2) {
+      border-color: color-mix(in oklch, var(--verdigris), transparent 36%);
+    }
+
+    .hero-tile:nth-child(3) {
+      border-color: color-mix(in oklch, var(--violet-live), transparent 38%);
+    }
+
+    .hero-tile:nth-child(4) {
+      border-color: color-mix(in oklch, var(--acid-note), transparent 38%);
+    }
+
+    .hero-index {
+      border-top: 1px solid var(--hairline);
+    }
+
+    .hero-index a {
+      grid-template-columns: 18px 1fr;
+      border-bottom-color: var(--hairline);
+      color: color-mix(in oklch, var(--veil), transparent 27%);
+    }
+
+    .hero-index span:first-child {
+      position: relative;
+      color: transparent;
+      font-size: 0;
+    }
+
+    .hero-index span:first-child::before {
+      position: absolute;
+      top: 0.5em;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      border: 1px solid var(--ember-pale);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .hero-index strong {
+      color: var(--veil);
+    }
+
+    .intro {
+      padding-top: clamp(72px, 11vh, 124px);
+      padding-bottom: clamp(96px, 16vh, 176px);
+    }
+
+    .intro-grid {
+      grid-template-columns: minmax(120px, 0.18fr) minmax(0, 0.92fr) minmax(260px, 0.66fr);
+      gap: clamp(34px, 8vw, 116px);
+      border-top: 1px solid var(--hairline-hot);
+      padding-top: clamp(34px, 6vw, 70px);
+    }
+
+    .intro-note {
+      max-width: 62ch;
+      color: color-mix(in oklch, var(--veil), transparent 8%);
+      font-size: clamp(1.18rem, 1.75vw, 1.58rem);
+      font-weight: 500;
+      line-height: 1.86;
+    }
+
+    .position-image {
+      min-height: 310px;
+      gap: 8px;
+      transform: rotate(1.5deg);
+    }
+
+    .position-card {
+      border: 1px solid var(--hairline);
+      background: transparent !important;
+      color: var(--veil) !important;
+      font-family: var(--display);
+      font-weight: 500;
+    }
+
+    .position-card:nth-child(1) {
+      color: var(--ember-pale) !important;
+    }
+
+    .position-card:nth-child(2) {
+      color: var(--verdigris) !important;
+    }
+
+    .position-card:nth-child(3) {
+      color: var(--acid-note) !important;
+    }
+
+    .project {
+      position: relative;
+      min-height: 104svh;
+      grid-template-columns: minmax(0, 0.8fr) minmax(340px, 0.92fr);
+      gap: clamp(42px, 8vw, 118px);
+      border-top: 0;
+      padding-top: clamp(96px, 16vh, 172px);
+      padding-bottom: clamp(96px, 16vh, 172px);
+    }
+
+    .project::before {
+      position: absolute;
+      inset: clamp(46px, 8vw, 96px) max(-58px, -4vw);
+      z-index: -2;
+      background: var(--scene-wash, transparent);
+      clip-path: polygon(0 8%, 100% 0, 94% 92%, 3% 100%);
+      content: "";
+      opacity: 0.82;
+    }
+
+    .project::after {
+      position: absolute;
+      inset: clamp(62px, 10vw, 118px) max(-32px, -2vw);
+      z-index: -1;
+      border-top: 1px solid var(--hairline);
+      content: "";
+      pointer-events: none;
+    }
+
+    #campfire {
+      --scene-wash: linear-gradient(102deg, color-mix(in oklch, var(--ember-live), transparent 91%), transparent 66%);
+    }
+
+    #memory {
+      --scene-wash: linear-gradient(102deg, color-mix(in oklch, var(--verdigris), transparent 87%), transparent 66%);
+    }
+
+    #luxun {
+      --scene-wash: linear-gradient(102deg, color-mix(in oklch, var(--veil), transparent 92%), transparent 66%);
+    }
+
+    #meituan {
+      --scene-wash: linear-gradient(102deg, color-mix(in oklch, var(--acid-note), transparent 87%), transparent 66%);
+    }
+
+    .project-kicker {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: var(--ember-pale);
+    }
+
+    .project-number {
+      display: none;
+    }
+
+    .project-title {
+      max-width: 12ch;
+      margin-bottom: 24px;
+      color: var(--veil);
+      font-size: clamp(2.8rem, 5.9vw, 5.9rem);
+      font-weight: 500;
+      letter-spacing: -0.032em;
+    }
+
+    .project-title .cn {
+      margin-top: 12px;
+      color: color-mix(in oklch, var(--veil), transparent 12%);
+      font-family: var(--display);
+      font-size: 0.34em;
+      font-weight: 500;
+      line-height: 1.36;
+    }
+
+    .tags {
+      gap: 7px;
+      margin-bottom: 30px;
+    }
+
+    .tags li {
+      border: 1px solid color-mix(in oklch, var(--veil), transparent 82%);
+      background: transparent;
+      color: color-mix(in oklch, var(--veil), transparent 22%);
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .project-lead {
+      max-width: 38ch;
+      color: var(--veil);
+      font-size: clamp(1.23rem, 1.85vw, 1.72rem);
+      font-weight: 500;
+      line-height: 1.82;
+    }
+
+    .project-sublead,
+    .project-points,
+    .project-detail,
+    .activity-card p,
+    .activity-demo-result,
+    .memory-product-card p,
+    .conversation-output,
+    .meituan-preview-panel p,
+    .visual-caption,
+    .about-copy {
+      color: color-mix(in oklch, var(--veil), transparent 16%);
+    }
+
+    .project-sublead,
+    .project-points,
+    .project-detail {
+      max-width: 60ch;
+      line-height: 1.82;
+    }
+
+    .visual-stage {
+      min-height: 760px;
+      overflow: visible;
+      isolation: isolate;
+    }
+
+    .visual-stage::before {
+      inset: 42px 0 88px 36px;
+      border: 1px solid color-mix(in oklch, var(--veil), transparent 88%);
+      background:
+        linear-gradient(154deg, color-mix(in oklch, var(--veil), transparent 96%), transparent 52%),
+        var(--stage-wash, color-mix(in oklch, var(--void-2), transparent 16%));
+      clip-path: polygon(5% 0, 100% 5%, 92% 96%, 0 100%);
+    }
+
+    #campfire .visual-stage::before {
+      --stage-wash: linear-gradient(155deg, color-mix(in oklch, var(--ember-live), transparent 76%), color-mix(in oklch, var(--void), transparent 4%) 68%);
+    }
+
+    #memory .visual-stage::before {
+      --stage-wash: linear-gradient(155deg, color-mix(in oklch, var(--verdigris), transparent 70%), color-mix(in oklch, var(--void), transparent 4%) 70%);
+    }
+
+    #luxun .visual-stage::before {
+      --stage-wash: linear-gradient(155deg, color-mix(in oklch, var(--veil), transparent 73%), color-mix(in oklch, var(--void), transparent 6%) 68%);
+    }
+
+    #meituan .visual-stage::before {
+      --stage-wash: linear-gradient(155deg, color-mix(in oklch, var(--acid-note), transparent 69%), color-mix(in oklch, var(--void), transparent 5%) 72%);
+    }
+
+    .project-p5-layer {
+      opacity: 0.44;
+      mix-blend-mode: lighten;
+    }
+
+    .watch-face,
+    .phone-frame,
+    .meituan-window {
+      box-shadow: 0 5px 8px rgba(0, 0, 0, 0.22);
+    }
+
+    .watch-band,
+    .watch-face,
+    .memory-product,
+    .conversation-output,
+    .activity-panel,
+    .activity-tab,
+    .meituan-preview-panel,
+    .memory-demo-card,
+    .memory-product-card,
+    .activity-demo-screen {
+      border-color: color-mix(in oklch, var(--veil), transparent 84%);
+    }
+
+    .memory-product,
+    .conversation-output,
+    .activity-panel,
+    .activity-tab,
+    .meituan-preview-panel,
+    .memory-demo-card {
+      background: color-mix(in oklch, var(--void), transparent 10%);
+    }
+
+    .memory-product-card,
+    .activity-demo-screen {
+      background: color-mix(in oklch, var(--verdigris), transparent 90%);
+    }
+
+    .activity-tab {
+      min-height: 82px;
+    }
+
+    .activity-tab:hover,
+    .activity-tab.active {
+      border-color: color-mix(in oklch, var(--ember-pale), transparent 26%);
+      color: var(--ember-pale);
+    }
+
+    .prototype-button,
+    .activity-demo-actions button,
+    .chat-composer button {
+      border: 0;
+      background: var(--ember-live);
+      color: oklch(0.13 0.017 260);
+      font-weight: 800;
+    }
+
+    .meituan-preview-actions button {
+      border-color: color-mix(in oklch, var(--acid-note), transparent 54%);
+      color: color-mix(in oklch, var(--veil), transparent 16%);
+    }
+
+    .meituan-preview-actions button:hover,
+    .meituan-preview-actions button.active {
+      border-color: var(--acid-note);
+      background: color-mix(in oklch, var(--acid-note), transparent 84%);
+      color: var(--veil);
+    }
+
+    .about {
+      min-height: 86svh;
+      border-top: 1px solid var(--hairline-hot);
+      padding-top: clamp(96px, 14vh, 156px);
+    }
+
+    .about h2 {
+      color: var(--veil);
+      font-size: clamp(2.8rem, 5.4vw, 5.5rem);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+    }
+
+    .about-copy {
+      max-width: 46ch;
+      font-weight: 500;
+    }
+
+    .publication-list li,
+    .contact-list a,
+    .contact-list span {
+      border-bottom-color: var(--hairline);
+      color: color-mix(in oklch, var(--veil), transparent 18%);
+    }
+
+    .publication-list strong,
+    .contact-list strong {
+      color: var(--veil);
+    }
+
+    @media (max-width: 900px) {
+      .site-shell,
+      .project,
+      .about {
+        width: min(calc(100% - 28px), 720px);
+      }
+
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 34px;
+        align-items: start;
+      }
+
+      .hero-copy,
+      .hero-aside {
+        grid-column: auto;
+      }
+
+      .hero-copy {
+        padding-bottom: 0;
+      }
+
+      .hero::before {
+        top: 104px;
+        right: -96px;
+        width: 260px;
+        height: 520px;
+      }
+
+      .hero-meta {
+        display: grid;
+      }
+
+      .hero-aside {
+        min-height: auto;
+        padding: 34px 0 84px;
+      }
+
+      .hero-aside::before {
+        inset: 0 -14px 32px;
+      }
+
+      .intro-grid,
+      .project,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project:nth-of-type(even) .project-copy,
+      .project:nth-of-type(even) .visual-stage {
+        order: initial;
+      }
+
+      .visual-stage {
+        min-height: 680px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      body {
+        overflow-x: hidden;
+      }
+
+      .top-nav {
+        top: 0;
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: 0;
+        overflow-x: auto;
+      }
+
+      .tagline {
+        max-width: 100%;
+        font-size: clamp(2.35rem, 11vw, 3rem);
+        line-height: 1.08;
+        letter-spacing: -0.018em;
+        overflow-wrap: anywhere;
+      }
+
+      .tagline span {
+        display: block;
+      }
+
+      .mobile-title-break {
+        display: block;
+      }
+
+      .intro-line {
+        width: min(100%, 32ch);
+        max-width: 32ch;
+        overflow-wrap: anywhere;
+      }
+
+      .project-title {
+        max-width: none;
+        font-size: clamp(2.55rem, 12vw, 4rem);
+      }
+
+      .project {
+        padding-top: 88px;
+        padding-bottom: 92px;
+      }
+
+      .visual-stage {
+        min-height: 620px;
+      }
+
+      .hero-board {
+        transform: none;
+      }
+    }
+
   </style>
 </head>
 <body>
+
   <nav class="top-nav" aria-label="页面导航">
     <a class="nav-mark" href="#top">雷雨珊</a>
     <div class="nav-links">
       <a href="#campfire" data-nav="campfire">Ablaze</a>
-      <a href="#luxun" data-nav="luxun">Lu Xun</a>
       <a href="#memory" data-nav="memory">Memory</a>
+      <a href="#luxun" data-nav="luxun">Lu Xun</a>
       <a href="#meituan" data-nav="meituan">Meituan</a>
       <a href="#about" data-nav="about">About</a>
     </div>
@@ -2071,7 +3249,7 @@
         <div class="hero-statement">
           <p class="tagline">
             <span>把人文判断</span>
-            <span>做成可用的 AI 产品</span>
+            <span>做成可用的 <span class="mobile-title-break">AI 产品</span></span>
           </p>
           <p class="intro-line">
             哲学训练负责界定问题，产品判断负责选择取舍，vibe coding 负责让概念尽快变成可试用的界面。
@@ -2081,37 +3259,37 @@
       </div>
       <div class="hero-aside reveal">
         <p class="hero-deck">
-          四个原型处理同一个问题：当 AI 和软件介入人的日常经验时，界面该如何保留分寸、压力与温度。
+          四个原型沿着一条距离轴展开：从贴在皮肤上的火，到住进记忆里的画像，到站在身边的文化导览，再到替你跑腿的执行链路。
         </p>
         <div class="hero-board" aria-label="作品视觉索引">
-          <div class="hero-tile">Ablaze<br />行为火焰</div>
-          <div class="hero-tile">Lu Xun<br />文化现场</div>
-          <div class="hero-tile">Memory<br />克制的用户画像</div>
-          <div class="hero-tile">Meituan<br />周末办事 Agent</div>
+          <div class="hero-tile">Ablaze<br />贴在皮肤上</div>
+          <div class="hero-tile">Memory<br />住在记忆里</div>
+          <div class="hero-tile">Lu Xun<br />站在身边</div>
+          <div class="hero-tile">Meituan<br />替你跑腿</div>
         </div>
         <ol class="hero-index">
           <li>
             <a href="#campfire">
-              <span>01</span>
-              <span><strong>Ablaze</strong><br />Apple Watch app</span>
-            </a>
-          </li>
-          <li>
-            <a href="#luxun">
-              <span>02</span>
-              <span><strong>Lu Xun AI Tour Guide</strong><br />Multimodal cultural UX</span>
+              <span>skin</span>
+              <span><strong>Ablaze</strong><br />AI against the skin</span>
             </a>
           </li>
           <li>
             <a href="#memory">
-              <span>03</span>
-              <span><strong>Personalized Memory Engine</strong><br />AI product prototype</span>
+              <span>memory</span>
+              <span><strong>Personalized Memory Engine</strong><br />AI inside memory</span>
+            </a>
+          </li>
+          <li>
+            <a href="#luxun">
+              <span>place</span>
+              <span><strong>Lu Xun AI Tour Guide</strong><br />AI beside the place</span>
             </a>
           </li>
           <li>
             <a href="#meituan">
-              <span>04</span>
-              <span><strong>Meituan Weekend Agent</strong><br />Hackathon prototype</span>
+              <span>agent</span>
+              <span><strong>Meituan Weekend Agent</strong><br />AI as execution chain</span>
             </a>
           </li>
         </ol>
@@ -2123,21 +3301,21 @@
         <p class="small-label">Working thesis</p>
         <div>
           <p class="intro-note">
-            好的 AI 产品并不来自把一切算清楚，而来自理解那些无法被完全计算的东西：语境、欲望、误会、记忆与信任。Vibe coding 对她而言不是为了展示技术，而是一种把判断力快速外化的思考工具。
+            好的 AI 产品并不来自把一切算清楚，而来自理解那些无法被完全计算的东西：语境、欲望、误会、记忆与信任。这里的四个原型不是并列展品，而是四种距离：皮肤、记忆、现场、跑腿。每一段距离都在问同一个问题：界面该保留什么。
           </p>
         </div>
         <div class="position-image" aria-label="语境、欲望、记忆与信任的视觉卡片">
-          <div class="position-card">语境</div>
-          <div class="position-card">欲望</div>
-          <div class="position-card">记忆<br />与信任</div>
+          <div class="position-card">皮肤</div>
+          <div class="position-card">记忆</div>
+          <div class="position-card">现场<br />与跑腿</div>
         </div>
       </div>
     </section>
 
     <section class="project section site-shell" id="campfire" data-section="campfire">
       <div class="project-copy reveal">
-        <p class="project-kicker">Apple Watch behavior design</p>
-        <div class="project-number">01</div>
+        <p class="project-kicker">Act I · against the skin</p>
+        <div class="project-number">skin</div>
         <h2 class="project-title">着了 <span class="cn">把健康提醒变成手腕上的火。</span></h2>
         <ul class="tags" aria-label="项目标签">
           <li>Apple Watch</li>
@@ -2149,14 +3327,15 @@
           “着了”在中文里有三层意思：着火，着迷，中了 ta 的道。
         </p>
         <p class="project-sublead">
-          Ablaze 把这三层意思都做成了一团火：当你忽视身体、deadline 在逼近，手腕上会燃起一团珊瑚色的火，它知道你忽视过几次，越来越没耐心。
+          这是距离最近的一种 AI：不在聊天框里解释你，而是在手腕上对你施加推力。当你忽视身体、deadline 在逼近，手腕上会燃起一团珊瑚色的火，它知道你忽视过几次，越来越没耐心。
         </p>
         <div class="project-detail">
-          <p>你被火烧，也被火着迷；你和朋友互相点火，是促进彼此完成事情的方式。</p>
-          <p>善意的提醒、竞赛、监督，本质上都是在推动 ta 着了。</p>
+          <p>它不是健康提醒，也不是漂亮版倒计时。它把“该做但没做”的东西统一翻译成一团有人格的火。</p>
+          <p>下一步的多人协作不是排行榜，而是战友页：你不知道朋友在写什么，但你知道 ta 也在被烧。</p>
         </div>
       </div>
       <div class="visual-stage reveal">
+        <div class="project-p5-layer" data-p5-sketch="campfire" aria-hidden="true"></div>
         <img
           class="ablaze-app-icon"
           src="assets/ablaze-coral-flame-1024.png"
@@ -2184,59 +3363,10 @@
       </div>
     </section>
 
-    <section class="project section site-shell" id="luxun" data-section="luxun">
-      <div class="project-copy reveal">
-        <p class="project-kicker">Cultural AI guide</p>
-        <div class="project-number">02</div>
-        <h2 class="project-title">Lu Xun AI Tour Guide <span class="cn">鲁迅 AI 导览</span></h2>
-        <ul class="tags" aria-label="项目标签">
-          <li>Multimodal AI</li>
-          <li>React</li>
-          <li>Anthropic API</li>
-          <li>Cultural Heritage</li>
-        </ul>
-        <p class="project-lead">
-          一个微信式 AI 导览界面：拍下鲁迅相关历史地点，得到带有文学脉络与时代语境的对话式解释。
-        </p>
-        <div class="project-points">
-          <p>微信式 UI 是产品判断：让用户在熟悉的交互里进入陌生的历史。</p>
-          <p>多模态输入之后，Claude 不只识别图像，也被提示去保留历史准确性与对话温度。</p>
-          <p>关键不在回答更多问题，而在把历史地点从“可打卡的纪念物”重新组织成一段可追问的现场。</p>
-        </div>
-      </div>
-      <div class="visual-stage reveal" id="chatStage">
-        <div class="phone-frame" aria-label="微信式对话界面示意">
-          <div class="phone-screen">
-            <div class="chat-header">鲁迅 AI 导览</div>
-            <div class="chat-body">
-              <div class="site-thumb" aria-label="历史地点照片占位图"></div>
-              <div class="bubble user">这栋楼和鲁迅有什么关系？</div>
-              <div class="bubble ai typing-bubble">
-                <span class="typing"><i></i><i></i><i></i></span>
-              </div>
-              <div class="bubble ai final-bubble">
-                这里可以从“生活现场”而不只是“文学纪念地”来理解。鲁迅的文本常常把街巷、房间、饭桌这些普通空间变成时代情绪的入口。
-              </div>
-            </div>
-            <form class="chat-composer" id="luxunComposer">
-              <input
-                id="luxunInput"
-                type="text"
-                value="鲁迅为什么总写日常小事？"
-                aria-label="向鲁迅 AI 导览提问"
-              />
-              <button type="submit">发送</button>
-            </form>
-          </div>
-        </div>
-        <p class="visual-caption">进入视口后，对话会按真实聊天节奏浮现。</p>
-      </div>
-    </section>
-
     <section class="project section site-shell" id="memory" data-section="memory">
       <div class="project-copy reveal">
-        <p class="project-kicker">Personal memory product</p>
-        <div class="project-number">03</div>
+        <p class="project-kicker">Act II · inside memory</p>
+        <div class="project-number">memory</div>
         <h2 class="project-title">Personalized Memory Engine <span class="cn">个性化 Memory 系统</span></h2>
         <ul class="tags" aria-label="项目标签">
           <li>AI Product Design</li>
@@ -2245,12 +3375,12 @@
           <li>Xiaohongshu</li>
         </ul>
         <p class="project-lead">
-          为小红书 AI 聊天机器人“点点”设计的记忆系统：从搜索、点赞、收藏、评论、关注与购买里，生成可被对话调用的用户画像。
+          从手腕退到心理，第二个问题变成：AI 记住你到什么程度，才像理解，而不是监视。
         </p>
         <div class="project-points">
-          <p>难点是“记住到什么程度才让人觉得被理解，而不是被盯着”。</p>
-          <p>她设计信号权重、画像结构和对话唤起方式，再用 vibe coding 做出可试用原型。</p>
-          <p>这个项目连接了用户心理、平台伦理与产品落地：从人文判断到工程交付之前的那一步。</p>
+          <p>这是为小红书 AI 聊天机器人“点点”设计的记忆系统：从搜索、点赞、收藏、评论、关注与购买里，生成可被对话调用的用户画像。</p>
+          <p>她设计信号权重、画像结构和对话唤起方式，再用 vibe coding 做出可试用原型，用来验证亲密感和监控感的边界。</p>
+          <p>这个项目连接了用户心理、平台伦理与产品落地：Memory 的目标不是知道更多，而是知道得有分寸。</p>
         </div>
         <div class="memory-activity" aria-label="Memory 项目的 vibe coding 小活动">
           <h3>为了验证“记忆如何被体验”，她又做了两个轻量活动原型。</h3>
@@ -2315,6 +3445,7 @@
         </div>
       </div>
       <div class="visual-stage reveal">
+        <div class="project-p5-layer" data-p5-sketch="memory" aria-hidden="true"></div>
         <div class="memory-product" aria-label="点点 Memory 产品界面示意">
           <div class="memory-product-header">
             <strong>点点 Memory</strong>
@@ -2336,10 +3467,60 @@
       </div>
     </section>
 
+    <section class="project section site-shell" id="luxun" data-section="luxun">
+      <div class="project-copy reveal">
+        <p class="project-kicker">Act III · beside the place</p>
+        <div class="project-number">place</div>
+        <h2 class="project-title">Lu Xun AI Tour Guide <span class="cn">鲁迅 AI 导览</span></h2>
+        <ul class="tags" aria-label="项目标签">
+          <li>Multimodal AI</li>
+          <li>React</li>
+          <li>Anthropic API</li>
+          <li>Cultural Heritage</li>
+        </ul>
+        <p class="project-lead">
+          距离再拉远，AI 不再主要理解“你”，而是理解你站着的地方：一栋楼、一条街、一段被纪念物遮住的现场。
+        </p>
+        <div class="project-points">
+          <p>这是一个微信式 AI 导览界面：拍下鲁迅相关历史地点，得到带有文学脉络与时代语境的对话式解释。</p>
+          <p>微信式 UI 是产品判断：让用户在熟悉的交互里进入陌生的历史。多模态输入之后，Claude 不只识别图像，也被提示去保留历史准确性与对话温度。</p>
+          <p>关键不在回答更多问题，而在把历史地点从“可打卡的纪念物”重新组织成一段可追问的现场。</p>
+        </div>
+      </div>
+      <div class="visual-stage reveal" id="chatStage">
+        <div class="project-p5-layer" data-p5-sketch="luxun" aria-hidden="true"></div>
+        <div class="phone-frame" aria-label="微信式对话界面示意">
+          <div class="phone-screen">
+            <div class="chat-header">鲁迅 AI 导览</div>
+            <div class="chat-body">
+              <div class="site-thumb" aria-label="历史地点照片占位图"></div>
+              <div class="bubble user">这栋楼和鲁迅有什么关系？</div>
+              <div class="bubble ai typing-bubble">
+                <span class="typing"><i></i><i></i><i></i></span>
+              </div>
+              <div class="bubble ai final-bubble">
+                这里可以从“生活现场”而不只是“文学纪念地”来理解。鲁迅的文本常常把街巷、房间、饭桌这些普通空间变成时代情绪的入口。
+              </div>
+            </div>
+            <form class="chat-composer" id="luxunComposer">
+              <input
+                id="luxunInput"
+                type="text"
+                value="鲁迅为什么总写日常小事？"
+                aria-label="向鲁迅 AI 导览提问"
+              />
+              <button type="submit">发送</button>
+            </form>
+          </div>
+        </div>
+        <p class="visual-caption">进入视口后，对话会按真实聊天节奏浮现。</p>
+      </div>
+    </section>
+
     <section class="project section site-shell" id="meituan" data-section="meituan">
       <div class="project-copy reveal">
-        <p class="project-kicker">Meituan AI Hackathon / Weekend planning agent</p>
-        <div class="project-number">04</div>
+        <p class="project-kicker">Act IV · execution at a distance</p>
+        <div class="project-number">agent</div>
         <h2 class="project-title">Weekend Agent <span class="cn">把周末闲时活动规划做完</span></h2>
         <ul class="tags" aria-label="项目标签">
           <li>FastAPI</li>
@@ -2348,15 +3529,16 @@
           <li>Planning Agent</li>
         </ul>
         <p class="project-lead">
-          美团 2026 AI Hackathon 命题六“本地探索：周末闲时活动规划”的 Agent 原型：输入一句周末目标，系统会拆解成玩、吃、逛和预订，把天气、票、座位、距离与分享做成一条可执行链路。
+          最远的 AI 不需要住进你的生活，它只需要把一句模糊意图变成一条可以确认、可以执行、可以分享的链路。
         </p>
         <div class="project-points">
-          <p>它不是单纯推荐地点，而是把“怎么安排”直接翻译成可确认、可执行的方案。</p>
-          <p>Demo 用 Mock API 模拟景点、餐厅、附加服务和异常处理，保证整个流程能跑通。</p>
+          <p>这是美团 2026 AI Hackathon 命题六“本地探索：周末闲时活动规划”的 Agent 原型：输入一句周末目标，系统会拆解成玩、吃、逛和预订。</p>
+          <p>Demo 用 Mock API 模拟景点、餐厅、附加服务和异常处理，把天气、票、座位、距离与分享都放进一个能跑通的流程。</p>
           <p>设计重点是把理解意图、确认方案、一键执行、生成报告放进同一个界面。</p>
         </div>
       </div>
       <div class="visual-stage reveal">
+        <div class="project-p5-layer" data-p5-sketch="meituan" aria-hidden="true"></div>
         <div class="meituan-demo" aria-label="周末办事 Agent 原型">
           <div class="meituan-window">
             <div class="meituan-window-bar">
@@ -2419,7 +3601,11 @@
     </section>
   </main>
 
+  <script src="assets/vendor/p5.min.js"></script>
+  <script src="assets/portfolio-projects-p5.js"></script>
   <script>
+
+
     const revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
